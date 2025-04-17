@@ -178,3 +178,74 @@ public class TextBoxTest extends BaseTest {
 | `public`    | Переменная доступна везде                           |
 | `static`    | Принадлежит классу, а не объекту                    |
 | `final`     | Нельзя изменить (константа)                         |
+
+
+# Шпаргалка по локаторам в Selenium
+
+В Selenium WebDriver для поиска элементов на веб-странице используется класс `By`
+---
+
+## 1. **By.id**
+Поиск элемента по его уникальному атрибуту `id`.
+
+By userNameInput = By.id("userName");
+driver.findElement(userNameInput).sendKeys("Марина");
+
+## 2. By.className
+Поиск элемента по его атрибуту class.
+By loginButton = By.className("login-btn");
+driver.findElement(loginButton).click();
+
+## 3. By.name
+Поиск элемента по атрибуту name.
+By searchBox = By.name("search");
+driver.findElement(searchBox).sendKeys("Java");
+
+## 4. By.xpath
+Поиск элемента с использованием XPath (язык запросов для поиска элементов).
+By userNameInput = By.xpath("//input[@id='userName']");
+driver.findElement(userNameInput).sendKeys("Марина");
+XPath поддерживает различные способы поиска, включая:
+
+Поиск по атрибутам:
+By userNameInput = By.xpath("//input[@name='userName']");
+
+Поиск по тексту элемента:
+By button = By.xpath("//button[text()='Submit']");
+
+Поиск по частичному совпадению текста:
+By button = By.xpath("//button[contains(text(),'Submit')]");
+
+## 5. By.cssSelector
+Поиск элемента с использованием CSS-селекторов.
+By submitButton = By.cssSelector("button#submit");
+driver.findElement(submitButton).click();
+
+## 6. By.linkText
+Поиск элемента по полному тексту ссылки.
+By signUpLink = By.linkText("Sign Up");
+driver.findElement(signUpLink).click();
+
+## 7. By.partialLinkText
+Поиск элемента по части текста ссылки.
+By signUpLink = By.partialLinkText("Sign");
+driver.findElement(signUpLink).click();
+
+## 8. contains()
+Метод XPath для поиска по части значения атрибута или текста.
+By userNameInput = By.xpath("//input[contains(@id,'user')]");
+driver.findElement(userNameInput).sendKeys("Марина");
+
+## Общие примеры:
+Поиск элемента по классу:
+By loginButton = By.className("login");
+Поиск по частичному тексту:
+By submitButton = By.xpath("//button[contains(text(),'Submit')]");
+Эти локаторы часто используются в автоматизированных тестах для поиска элементов и взаимодействия с ними. Выбирай подходящий локатор в зависимости от структуры HTML страницы и требований теста.
+
+
+
+
+
+
+
