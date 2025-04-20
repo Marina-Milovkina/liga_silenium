@@ -11,23 +11,23 @@ import java.util.List;
 
 public class BasePage {
 
-    protected WebDriver driver;
+    protected WebDriver driver; // модификатор доступа - тип переменной (драйвер браузера) - имя переменной
 
-    public BasePage(WebDriver driver) {
-        this.driver = driver;
+    public BasePage(WebDriver driver) {  // конструктор класса BasePage
+        this.driver = driver; // переменной класса присвоить значение, которое пришло в конструкторе
     }
 
     /**
      * Локатор до названия страницы в средней части страницы
      */
-    private static final By NAME_PAGE = By.xpath("//h1[@class='text-center']");
+    private static final By NAME_PAGE = By.xpath("//h1[@class='text-center']"); // создание переменной типа By (локатор)
 
     /**
      * Перейти по url
      * @param url ссылка в виде строки
      */
     public void openUrl(String url) {
-        driver.get(url);
+        driver.get(url);  // команда WebDriver, которая открывает указанный url в браузере
     }
 
     /**
@@ -104,8 +104,8 @@ public class BasePage {
      * Метод, вызывающий AssertionError
      */
     public void failure(){
-        throw new AssertionError();
-    }
+        throw new AssertionError(); // Иногда в тесте самой по себе ошибки нет, но что-то пошло не так, и ты хочешь сказать об этом явно — вызвать ошибку вручную. Метод failure() как раз для этого.
+    } // throw - бросить (вызвать), new - новый объект ошибки и прервать программу
 
     /**
      * Проверка - элемент отображается
@@ -127,5 +127,16 @@ public class BasePage {
      */
     public void waitElementsDisplay(By locator, int second){
         new WebDriverWait(driver, Duration.ofSeconds(second)).until(d -> isElementDisplay(locator));
-        }
+    }
+
+    // скролл до нужного элемента
+    protected void scrollIntoView(WebElement element) {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+    }
+
+    // клик через JS
+    protected void clickUsingJavaScript(WebElement element) {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+    }
+
 }

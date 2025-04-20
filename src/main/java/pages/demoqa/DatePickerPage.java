@@ -20,8 +20,8 @@ public class DatePickerPage extends BasePage {
      * @param number число (день)
      * @return xpath до выбранного дня
      */
-    private String dayInDatePicker(int number){
-        return String.format("//div[@role='option' and text()='%s']", number);
+        private String dayInDatePicker(int number){
+        return String.format("//div[@role='option' and text()='%s']", number); // используется метод для динамического формирования строки
         }
 
         private static final String MONTH_SELECT = "//select[contains(@class, 'month')]";
@@ -34,6 +34,7 @@ public class DatePickerPage extends BasePage {
      * Открыть страницу - "Date Picker"
      */
     public void openDatePickerPage(){
+
         openUrl(URL_DATE_PICKER_PAGE);
     }
 
@@ -41,6 +42,7 @@ public class DatePickerPage extends BasePage {
      * Нажать на элемент с выбором даты
      */
     public void clickDatePicker(){
+
         click(By.xpath(SELECT_DATE_ELEMENT));
     }
 
@@ -49,8 +51,8 @@ public class DatePickerPage extends BasePage {
      * @param month название месяца
      */
         public void selectMonth(String month){
-            Select monthSelect = new Select(findElement(By.xpath(MONTH_SELECT)));
-            monthSelect.selectByVisibleText(month);
+            Select monthSelect = new Select(findElement(By.xpath(MONTH_SELECT))); // Оборачивает найденный элемент в объект Select из библиотеки Selenium, чтобы использовать методы работы с <select>-тегами.
+            monthSelect.selectByVisibleText(month); // Выбирает нужный месяц по тексту, который виден пользователю в выпадающем списке (например, "March").
         }
 
     /**
@@ -76,6 +78,7 @@ public class DatePickerPage extends BasePage {
      * @return true если элемент отображается
      */
     public boolean isResultDateDisplayed(){
-            return isElementDisplay(By.xpath(RESULT_DATE_INPUT));
+
+        return isElementDisplay(By.xpath(RESULT_DATE_INPUT));
         }
     }

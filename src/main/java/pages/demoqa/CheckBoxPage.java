@@ -6,14 +6,20 @@ import pages.base.BasePage;
 
 public class CheckBoxPage extends BasePage {
 
+    /** Конструктор класса CheckBoxPage
+     * CheckBoxPage получает driver.
+     * Передаёт его в BasePage через super(driver).
+     * Теперь у CheckBoxPage есть доступ ко всем методам BasePage, и они знают, какой браузер использовать.
+      */
     public CheckBoxPage(WebDriver driver) {
-        super(driver);
+        super(driver); //  вызов конструктора родительского класса (BasePage) с параметром driver
     }
 
+    // константа
     private static final String URL_CHECK_BOX_PAGE = "https://demoqa.com/checkbox";
 
     /**
-     * Локатор до Input элемента чекбокса
+     * Универсальный локатор до Input элемента чекбокса
      */
     private static final String CHECK_BOX_INPUT_XPATH = "//input" +
             "[@type='checkbox'][following-sibling::span[text()='%s']]";
@@ -40,7 +46,7 @@ public class CheckBoxPage extends BasePage {
      * Открыть страницу с элементами "Check Box"
      */
     public void openCheckBoxPage(){
-        openUrl(URL_CHECK_BOX_PAGE);
+        openUrl(URL_CHECK_BOX_PAGE); // метод не принимает параметры, потому что url константа. Если бы мы создавали метод для открытия любой страницы, надо было бы передать ему параметры (String url)
     }
 
     /**
@@ -58,7 +64,7 @@ public class CheckBoxPage extends BasePage {
      * @param state нужное состояние, true, если чекбокс должен быть активным, false - если нет
      */
     public void setCheckBox(String checkBoxName, boolean state) {
-        if (!getCheckBoxState(checkBoxName) == state) {
+        if (!getCheckBoxState(checkBoxName) == state) { // "если текущее состояние чекбокса не соответствует требуемому"
     click(By.xpath(String.format(CHECK_BOX_XPATH, checkBoxName)));
         }
     }
@@ -69,7 +75,7 @@ public class CheckBoxPage extends BasePage {
      * @return true если отображается
      */
     public boolean isCheckBoxDisplay(String checkBoxName) {
-        return isElementDisplay(By.xpath(String.format(CHECK_BOX_XPATH,checkBoxName)));
+        return isElementDisplay(By.xpath(String.format(CHECK_BOX_XPATH,checkBoxName))); // метод String.format позволяет подставить в плейсхолдер константы переменную checkBoxName
     }
 
     /**
@@ -79,7 +85,7 @@ public class CheckBoxPage extends BasePage {
      */
     public boolean isListCheckBoxClosed(String checkBoxName){
         return isElementDisplay(By.xpath(String.format(LIST_CHECKBOX_XPATH,checkBoxName,"collapsed")));
-    }
+    } // collapsed - строковое значение, которое подставляется на место плейсхолдера в class
 
     /**
      * Метод открытия списка чекбоксов нажатием на toggle рядом с чекбоксом для открытия списка

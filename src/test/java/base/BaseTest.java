@@ -18,7 +18,7 @@ public class BaseTest {
     @AfterClass
     public void tearDownClass(){
         System.out.println("Tearing down after class.");
-        if (driver != null){
+        if (driver != null){ // проверка:  если объект драйвера создан — т.е. не null
             driver.quit();
         }
     }

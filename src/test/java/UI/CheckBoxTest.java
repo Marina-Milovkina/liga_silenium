@@ -9,14 +9,17 @@ import org.testng.annotations.Test;
 
 public class CheckBoxTest extends BaseTest {
 
-    private CheckBoxPage checkBoxPage;
+    private CheckBoxPage checkBoxPage; // объявляем переменную с модификатором доступа private типа CheckBoxPage
 
     @BeforeClass
     public void beforeClass(){
         System.out.println("Setting up before class in CheckBoxTest.");
-        checkBoxPage = new CheckBoxPage(driver);
+        checkBoxPage = new CheckBoxPage(driver); // помещаем в переменную новый объект и передаем ему драйвер
     }
 
+    /**
+     * Assert.assertEquals(actualValue, expectedValue) - проверяем соответствие фактического результата ожидаемому
+     */
     @Test(description = "Перейти на страницу")
     public void step_01(){
         checkBoxPage.openCheckBoxPage();
